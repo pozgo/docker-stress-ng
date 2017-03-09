@@ -1,0 +1,14 @@
+machine:
+  services:
+    - docker
+
+dependencies:
+  pre:
+    - docker info && docker version
+
+test:
+  pre:
+    - docker build -t polinux/stress-ng .
+
+  override:
+    - docker run -ti polinux/stress-ng stress-ng --version | grep stress-ng
